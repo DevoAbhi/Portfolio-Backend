@@ -1,24 +1,27 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+const cors = require('cors');
 import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
 
+app.use(cors());
+
 // Parse incoming request data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-AUTH-TOKEN");
-    res.setHeader("Access-Control-Allow-Methods",
-    "GET, POST, PATCH,PUT, DELETE,OPTIONS");
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader("Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-AUTH-TOKEN");
+//     res.setHeader("Access-Control-Allow-Methods",
+//     "GET, POST, PATCH,PUT, DELETE,OPTIONS");
 
-    next();
-});
+//     next();
+// });
 
 app.post('/contact-form-handler', (req, res) => {
     const name = req.body.name;
